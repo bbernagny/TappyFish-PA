@@ -20,22 +20,21 @@ public class Fish : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-
             _rb.velocity = new Vector2(_rb.velocity.x, speed);
         }
 
-        if(_rb.velocity.y > 0)
+        if (_rb.velocity.y > 0)
         {
-            if(angle <= maxAngle)
+            if (angle <= maxAngle)
             {
                 angle = angle + 4;
             }
         }
-        else if(_rb.velocity.y < -2.5f)
+        else if(_rb.velocity.y < -1.2f)
         {
-            if(angle > minAngle)
+            if (angle > minAngle)
             {
-                angle = angle - 2;
+                angle = angle -1;
             }
         }
 
