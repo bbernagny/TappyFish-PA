@@ -53,3 +53,6 @@ TagManager:
   - name: Frontground
     uniqueID: 3229084451
     locked: 0
+  - name: Canvas
+    uniqueID: 1906705865
+    locked: 0
