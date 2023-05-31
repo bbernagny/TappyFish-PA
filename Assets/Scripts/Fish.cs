@@ -10,37 +10,30 @@ public class Fish : MonoBehaviour
     int maxAngle = 20;
     int minAngle = -60;
 
+    public GameManager gameManager;
     public Score score;
+    public Sprite fishDied;
+    SpriteRenderer spRenderer;
+    Animator animator;
+
+    bool touchedGround;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        spRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _rb.velocity = new Vector2(_rb.velocity.x, speed);
-        }
+        FishSwim();        
+    }
 
-        if (_rb.velocity.y > 0)
-        {
-            if (angle <= maxAngle)
-            {
-                angle = angle + 4;
-            }
-        }
-        else if(_rb.velocity.y < -1.2f)
-        {
-            if (angle > minAngle)
-            {
-                angle = angle -1;
-            }
-        }
-
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+    private void FixedUpdate()
+    {
+        FishRotation();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,5 +42,63 @@ public class Fish : MonoBehaviour
         {
             score.Scored();
         }
+        else if (collision.CompareTag("column"))
+        {
+            //gameover
+        }
+    }
+
+    void FishSwim()
+    {
+        if (Input.GetMouseButtonDown(0) && GameManager.gameOver == false)
+        {
+            _rb.velocity = Vector2.zero;
+            _rb.velocity = new Vector2(_rb.velocity.x, speed);
+        }
+    }
+
+    void FishRotation()
+    {
+        if (_rb.velocity.y > 0)
+        {
+            if (angle <= maxAngle)
+            {
+                angle = angle + 4;
+            }
+        }
+        else if (_rb.velocity.y < -1.2f)
+        {
+            if (angle > minAngle)
+            {
+                angle = angle - 2;
+            }
+        }
+
+        if (touchedGround == false)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            if (GameManager.gameOver == false)
+            {
+                //gameover
+                gameManager.GameOver();
+                GameOverFish();
+            }
+        }
+    }
+
+    void GameOverFish()
+    {
+        touchedGround = true;
+        spRenderer.sprite = fishDied;
+        animator.enabled = false;
+        transform.rotation = Quaternion.Euler(0, 0, -90);
     }
 }

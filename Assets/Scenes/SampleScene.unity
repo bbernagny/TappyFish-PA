@@ -136,7 +136,7 @@ GameObject:
   m_Layer: 0
   m_Name: ObstacleSpawner
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -562,6 +562,7 @@ GameObject:
   - component: {fileID: 935901938}
   - component: {fileID: 935901937}
   - component: {fileID: 935901936}
+  - component: {fileID: 935901939}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -586,8 +587,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -19.47, y: -33.99994}
-  m_SizeDelta: {x: 124.53, y: 23.35}
+  m_AnchoredPosition: {x: -33.200012, y: -52.600006}
+  m_SizeDelta: {x: 110.8, y: 70.22}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &935901936
 MonoBehaviour:
@@ -614,7 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.9716981, g: 0.9671146, b: 0.9671146, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -623,20 +624,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 144
     m_FontStyle: 1
     m_BestFit: 1
-    m_MinSize: 5
+    m_MinSize: 1
     m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '0
-
-'
+  m_Text: 0
 --- !u!222 &935901938
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -645,6 +644,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935901934}
   m_CullTransparentMesh: 1
+--- !u!114 &935901939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935901934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 8.13, y: -4.3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1372569192
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,7 +1002,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 9
+  gameManager: {fileID: 298664633}
   score: {fileID: 935901936}
+  fishDied: {fileID: -1417420193, guid: d7adb274a34f842a6918eb061b88e8f7, type: 3}
 --- !u!1 &1698887056
 GameObject:
   m_ObjectHideFlags: 0
