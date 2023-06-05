@@ -8,8 +8,10 @@ public class Score : MonoBehaviour
     int score;
     int highScore;
     Text scoreText;
+
     public Text panelScore;
     public Text panelHighScore;
+    public GameObject New;
 
     void Start()
     {
@@ -33,11 +35,12 @@ public class Score : MonoBehaviour
             highScore = score;
             panelHighScore.text = highScore.ToString();
             PlayerPrefs.SetInt("highscore", highScore);
+            New.SetActive(true);
         }
     }
 
-    void Update()
+    public int GetScore()
     {
-        
+        return score;
     }
 }

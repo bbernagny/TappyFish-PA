@@ -15,12 +15,15 @@ public class Fish : MonoBehaviour
     public Sprite fishDied;
     SpriteRenderer spRenderer;
     Animator animator;
+    public ObstacleSpawner obstacleSpawner;
+    [SerializeField] private AudioSource swim, hit, point;
 
     bool touchedGround;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _rb.gravityScale = 0;
         spRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
     }
@@ -41,10 +44,14 @@ public class Fish : MonoBehaviour
         if (collision.CompareTag("obstacle"))
         {
             score.Scored();
+            point.Play();
         }
-        else if (collision.CompareTag("column"))
+        else if (collision.CompareTag("column") && GameManager.gameOver == false)
         {
             //gameover
+            hit.Play();
+            gameManager.GameOver();
+            GameOverFish();
         }
     }
 
@@ -52,8 +59,20 @@ public class Fish : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && GameManager.gameOver == false)
         {
-            _rb.velocity = Vector2.zero;
-            _rb.velocity = new Vector2(_rb.velocity.x, speed);
+            swim.Play();
+            if(GameManager.gameStarted == false)
+            {
+                _rb.gravityScale = 4f;
+                _rb.velocity = Vector2.zero;
+                _rb.velocity = new Vector2(_rb.velocity.x, speed);
+                obstacleSpawner.InstantiateObstacle();
+                gameManager.GameHasStarted();
+            }
+            else
+            {
+                _rb.velocity = Vector2.zero;
+                _rb.velocity = new Vector2(_rb.velocity.x, speed);
+            }
         }
     }
 
@@ -88,6 +107,7 @@ public class Fish : MonoBehaviour
             if (GameManager.gameOver == false)
             {
                 //gameover
+                hit.Play();
                 gameManager.GameOver();
                 GameOverFish();
             }
@@ -97,8 +117,8 @@ public class Fish : MonoBehaviour
     void GameOverFish()
     {
         touchedGround = true;
-        spRenderer.sprite = fishDied;
-        animator.enabled = false;
         transform.rotation = Quaternion.Euler(0, 0, -90);
+        animator.enabled = false;
+        spRenderer.sprite = fishDied;
     }
 }
